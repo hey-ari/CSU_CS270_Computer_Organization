@@ -1,0 +1,105 @@
+Programming Assignment P1: Introduction to C
+Due: See progress page
+This assignment has four objectives:
+To write a C program with console output,
+To learn how to submit your C program using the Checkin tab on the course web site,
+To understand how preliminary testing works, and
+To see if you can follow directions!
+Write a C program in a file called P1.c, using the example of the code structure shown below. You must declare two global arrays (arrays declared outside of any function), then write four functions and the main function, which is the entry point for C programs. Do exactly as described in the directions below:
+Create a directory for writing programs, we suggest calling it ~/cs270.
+Create a subdirectory for the P1 assignment, we suggest calling it ~/cs270/P1.
+Create a file called P1.c in the P1 subdirectory, and copy the code shown below.
+Personalize the comment block shown below by changing the author and email.
+Declare a global array of 5 doubles called input.
+Declare a global array of 4 doubles called output.
+In the main entry point, make sure the user provides five arguments.
+If not, print the following message and return EXIT_FAILURE from main.
+        usage: ./P1 <double> <double> <double> <double> <double>
+    
+Otherwise, convert arguments argv[1] to argv[5] from strings to doubles, using atof.
+Don't worry about argv[0], which always contains the program name.
+Next write three functions, each of which accepts two parameters and has no return value (void); write a fourth function accepts three parameters and has no return value (void).
+The first three functions accept an input value (double) and a pointer to an output value (double *); the fourth function accepts two input values (double) and a pointer to an output value (double *).
+For directions that relate to pointers you don't have to be an expert at pointers just use the provided code as a guide for now
+The first function is computeSphere, which computes the volume of a sphere given the radius, using (4.0 / 3.0) * 3.141593 * radius * radius * radius.
+The second function is computeCube, which computes the volume of a cube given the side, using side * side * side.
+The third function is computeTetrahedron, which computes the volume of a tetrahedron given the side, using 0.117851 * side * side * side.
+The fourth function is computeCylinder, which computes the volume of a cylinder given a radius and a height, using 3.141593 * radius * radius * height.
+Each function computes the volume, and dereferences the pointer to return it.
+Next, finish the main function as follows:
+Call computeSphere with input[0], passing it the address of output[0];
+Call computeCube with input[1], passing it the address of output[1];
+Call computeTetrahedron with input[2], passing it the address of output[2];
+Call computeCylinder with input[3] and input[4], passing it the address of output[3];
+Finally print the results of all computations, as shown below.
+The floating-point values given above are only approximations. Live with it. Don’t improve them!
+Follow the format shown in the sample output, with 5 digits after the decimal point.
+Program Structure
+The following code can be used as a starting point, note that the function does not match any of the functions asked for above.
+// P1 Assignment
+// Author: Phil Sharp
+// Date:   1/15/2020
+// Class:  CS270
+// Email:  sharpp@colostate.edu
+
+// Include files
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+// example of a global array
+int exampleGlobalArray[2];
+
+// this function can be used as a guide for the funtions you will implement
+void computeCircle(double radius, double *addressOfArea)
+{
+    // Compute area
+    double result = 3.141593 * radius * radius;
+
+    // Dereference pointer to return result
+    *addressOfArea = result;
+}
+
+int main(int argc, char *argv[])
+{
+    // Check number of arguments
+    if (argc != 2) {
+        printf("usage: ./P1 <double>\n");
+        return EXIT_FAILURE;
+    }
+
+    // Parse arguments
+    double radius = atof(argv[1]);
+
+    // Local variable
+    double area;
+
+    // Call function
+    computeCircle(radius, &area);
+
+    // Print area
+    printf("The area of a circle with radius %.5f equals %.5f.\n", radius, area);
+
+    // Return success
+    return EXIT_SUCCESS;
+}
+Sample output
+Your program should print four lines. The sample output below shows how to compile, and run the P1 program on Linux using the gcc compiler. See the grading criteria below for additional information.
+$ gcc -Wall P1.c -o P1
+
+$ ./P1 2.0 3.0 4.0 5.0 6.0
+SPHERE, radius = 2.00000, volume = 33.51033.
+CUBE, side = 3.00000, volume = 27.00000.
+TETRAHEDRON, side = 4.00000, volume = 7.54246.
+CYLINDER, radius = 5.00000, height = 6.00000, volume = 471.23895.
+Specifications
+Your program must meet the following specifications:
+Work on your own, as always.
+The name of the source code file must be exactly P1.c.
+Name the file exactly - upper and lower case matters!
+Comments at the top as shown above.
+Make sure your code runs on machines in the COMCS 120 lab.
+Submit your program to the Checkin tab as you were shown in the recitation.
+Read the syllabus for the late policy.
+We will be checking programs for plagiarism, so please don't copy from anyone else.
+Make sure your output matches the sample output EXACTLY. There are no regrades on assignments.
